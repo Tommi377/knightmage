@@ -8,7 +8,7 @@
 
 [node name="Battle" parent="." instance=ExtResource("1_h7iqs")]
 
-[node name="GameUI" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="Hand" type="HBoxContainer" parent="GameUI"]
 anchors_preset = 7

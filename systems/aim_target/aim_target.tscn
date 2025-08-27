@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://y7ns8y4emnix"]
+
+[ext_resource type="Script" uid="uid://c02lo3uv1ekrr" path="res://systems/aim_target/aim_target.gd" id="1_ga0sy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v40hl"]
+size = Vector2(4, 4)
+
+[sub_resource type="Curve" id="Curve_v40hl"]
+_limits = [0.195338, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.195338), 0.0, 0.0, 0, 0, Vector2(0.896552, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.195338), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="AimTarget" type="Node2D"]
+script = ExtResource("1_ga0sy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_v40hl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer"]
+width_curve = SubResource("Curve_v40hl")

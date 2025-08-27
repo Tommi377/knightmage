@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ro6va2mfvwe2"]
+[gd_scene load_steps=4 format=3 uid="uid://ro6va2mfvwe2"]
 
 [ext_resource type="Texture2D" uid="uid://bax2y8i6fpxe6" path="res://systems/battle/battle_fields.png" id="1_v40hl"]
+[ext_resource type="PackedScene" uid="uid://y7ns8y4emnix" path="res://systems/aim_target/aim_target.tscn" id="2_v40hl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kujvl"]
 size = Vector2(256, 100)
@@ -19,3 +20,5 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
 position = Vector2(128, 50)
 shape = SubResource("RectangleShape2D_kujvl")
+
+[node name="AimTarget" parent="." instance=ExtResource("2_v40hl")]

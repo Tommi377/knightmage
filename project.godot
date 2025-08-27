@@ -29,6 +29,10 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 
+[global_group]
+
+ui_layer=""
+
 [input]
 
 left_mouse={
@@ -46,6 +50,7 @@ right_mouse={
 
 2d_physics/layer_1="card_layer"
 2d_physics/layer_2="drop_layer"
+2d_physics/layer_3="targettable"
 
 [rendering]
 

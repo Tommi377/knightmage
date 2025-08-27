@@ -11,6 +11,8 @@ const MY_SCENE = preload("res://gui/card_ui/card_ui.tscn")
 @onready var card_drop: Area2D = %CardDropAreaDetector
 @onready var card_state_machine: CardStateMachine = %CardStateMachine
 
+var init_parent: Node
+
 var drop_area: Area2D
 var tween: Tween
 var playable := true
@@ -19,6 +21,7 @@ var disabled := false
 static func create_instance(parent: Node, card: Card) -> CardUI:
 	var instance := MY_SCENE.instantiate() as CardUI
 	instance.card = card
+	instance.init_parent = parent
 	parent.add_child(instance)
 	return instance
 
