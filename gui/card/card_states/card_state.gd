@@ -5,7 +5,7 @@ enum State {BASE, CLICKED, DRAGGING, AIMING, RELEASED}
 
 signal transition_requested(from: CardState, to: State)
 
-var card_ui: CardUI
+var card: Card
 
 func get_state_id() -> State:
 	assert(false, "(CardState) Please override `get_state_id()` in the derived script.")

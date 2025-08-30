@@ -10,7 +10,7 @@ func get_state_id() -> State:
 func enter() -> void:
 	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
 	if ui_layer:
-		card_ui.reparent(ui_layer)
+		card.reparent(ui_layer)
 	
 	minimum_drag_time_elapsed = false
 	var threshold_timer := get_tree().create_timer(DRAG_MINIMUM_THRESHOLD, false)
@@ -23,9 +23,9 @@ func exit() -> void:
 
 func on_input(event: InputEvent) -> void:	
 	if event is InputEventMouseMotion:
-		card_ui.global_position = card_ui.get_global_mouse_position() - card_ui.pivot_offset
+		card.global_position = card.get_global_mouse_position() - card.pivot_offset
 		
-		if card_ui.card.is_single_targeted() and card_ui.is_over_drop_area():
+		if card.card_data.is_single_targeted() and card.is_over_drop_area():
 			transition_requested.emit(self, CardState.State.AIMING)
 			return
 

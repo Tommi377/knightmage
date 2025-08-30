@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ro6va2mfvwe2" path="res://systems/battle/battle.tscn" id="1_h7iqs"]
 [ext_resource type="Script" uid="uid://buuuc22plokly" path="res://hand.gd" id="1_vasa2"]
-[ext_resource type="Resource" uid="uid://3d6wf6kv6mlx" path="res://content/card/slash/slash.tres" id="2_h7iqs"]
+[ext_resource type="Resource" uid="uid://3d6wf6kv6mlx" path="res://content/card_data/slash/slash.tres" id="2_h7iqs"]
 
 [node name="Game" type="Node"]
 
@@ -11,6 +11,7 @@
 [node name="GameUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="Hand" type="HBoxContainer" parent="GameUI"]
+custom_minimum_size = Vector2(0, 40)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

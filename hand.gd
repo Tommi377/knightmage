@@ -1,17 +1,18 @@
 class_name Hand
 extends HBoxContainer
 
-@export var _example_card: Card
+@export var _example_card: CardData
 
 func _ready() -> void:
 	add_card(_example_card)
+	add_card(_example_card)
 
-func add_card(card: Card) -> void:
-	var card_ui := CardUI.create_instance(self, card)
-	card_ui.card_reparent.connect(_on_card_reparent)
+func add_card(card_data: CardData) -> void:
+	var card := Card.create_instance(self, card_data)
+	card.card_reparent.connect(_on_card_reparent)
 	
-func _on_card_reparent(card_ui: CardUI) -> void:
-	card_ui.disabled = true
-	card_ui.reparent(self)
-	move_child.call_deferred(card_ui, -1)
-	card_ui.set_deferred("disabled", false)
+func _on_card_reparent(card: Card) -> void:
+	card.disabled = true
+	card.reparent(self)
+	move_child.call_deferred(card, -1)
+	card.set_deferred("disabled", false)

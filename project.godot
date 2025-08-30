@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Const="*res://autoload/const.gd"
 Data="*res://autoload/data.gd"
 Events="*res://autoload/events.gd"
+ActionManager="*res://autoload/action_manager.gd"
 
 [display]
 

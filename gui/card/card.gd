@@ -1,11 +1,11 @@
-class_name CardUI
+class_name Card
 extends Control
 
-signal card_reparent(card_ui: CardUI)
+signal card_reparent(card: Card)
 
-const MY_SCENE = preload("res://gui/card_ui/card_ui.tscn")
+const MY_SCENE = preload("res://gui/card/card.tscn")
 
-@export var card: Card
+@export var card_data: CardData
 
 @onready var icon: TextureRect = %Icon
 @onready var card_drop: Area2D = %CardDropAreaDetector
@@ -18,9 +18,9 @@ var tween: Tween
 var playable := true
 var disabled := false
 
-static func create_instance(parent: Node, card: Card) -> CardUI:
-	var instance := MY_SCENE.instantiate() as CardUI
-	instance.card = card
+static func create_instance(parent: Node, card_data: CardData) -> Card:
+	var instance := MY_SCENE.instantiate() as Card
+	instance.card_data = card_data.duplicate()
 	instance.init_parent = parent
 	parent.add_child(instance)
 	return instance
@@ -34,17 +34,18 @@ func _ready() -> void:
 		
 
 func play() -> void:
-	if not card:
+	if not card_data:
 		return
 	
-	card.play([])
-	queue_free()
+	var success := card_data.play(Const.PlayPhase.ATTACK, [self])
+	if success:
+		queue_free()
 
 func is_over_drop_area() -> bool:
 	return drop_area != null
 
 func update_ui() -> void:
-	icon.texture = card.icon
+	icon.texture = card_data.icon
 
 func init_state_machine() -> void:
 	card_state_machine.init(self)

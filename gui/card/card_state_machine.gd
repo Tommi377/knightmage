@@ -6,12 +6,12 @@ extends Node
 var current_state: CardState
 var states := {}
 
-func init(card: CardUI) -> void:
+func init(card: Card) -> void:
 	for child: CardState in get_children():
 		if child:
 			states[child.get_state_id()] = child
 			child.transition_requested.connect(_on_transition_requested)
-			child.card_ui = card
+			child.card = card
 	
 	if initial_state:
 		initial_state.enter()
