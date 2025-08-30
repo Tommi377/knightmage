@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bax2y8i6fpxe6"
-path="res://.godot/imported/battle_fields.png-57596da35c83cd946f5bb6c5b8ba8734.ctex"
+uid="uid://cqmhm6h4lxpb"
+path="res://.godot/imported/tile_0102.png-9f7d17ba05e3a404b8ef64523f21797b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://systems/battle/battle_fields.png"
-dest_files=["res://.godot/imported/battle_fields.png-57596da35c83cd946f5bb6c5b8ba8734.ctex"]
+source_file="res://gui/enemy_stats_ui/tile_0102.png"
+dest_files=["res://.godot/imported/tile_0102.png-9f7d17ba05e3a404b8ef64523f21797b.ctex"]
 
 [params]
 

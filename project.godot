@@ -18,9 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 Const="*res://autoload/const.gd"
+Log="*res://autoload/log.gd"
 Data="*res://autoload/data.gd"
 Events="*res://autoload/events.gd"
 ActionManager="*res://autoload/action_manager.gd"
+RoundManager="*res://autoload/round_manager.gd"
+PlayerManager="*res://autoload/player_manager.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
+gdscript/warnings/untyped_declaration=1
 
 [display]
 
@@ -33,6 +41,10 @@ window/stretch/mode="viewport"
 [global_group]
 
 ui_layer=""
+
+[gui]
+
+theme/custom="uid://biyo4f13bl4ih"
 
 [input]
 

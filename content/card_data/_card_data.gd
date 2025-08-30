@@ -63,7 +63,8 @@ func play(phase: Const.PlayPhase, targets: Array[Node]) -> bool:
 		Events.card.play.emit(self)
 	return card_played
 
-func play_default(targets: Array[Node]) -> bool:
+func play_default(_targets: Array[Node]) -> bool:
+	print_debug("Played using default")
 	return true
 
 func get_description() -> String:

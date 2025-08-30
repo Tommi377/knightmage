@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_42kpy")
-base_damage = 4
+base_damage = 2
 id = "slash"
 type = 0
 rarity = 0

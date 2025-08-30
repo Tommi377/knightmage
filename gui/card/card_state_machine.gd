@@ -39,7 +39,6 @@ func on_mouse_exited() -> void:
 
 
 func _on_transition_requested(from: CardState, to: CardState.State) -> void:
-	print_debug("Transition to: " + str(to))
 	if from != current_state:
 		return
 		

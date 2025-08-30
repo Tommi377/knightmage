@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyUnitData" load_steps=3 format=3 uid="uid://how3g5g1vhqv"]
+
+[ext_resource type="Texture2D" uid="uid://b6qf3lc6hen8y" path="res://content/enemy/enemy_unit/enemy_unit_data/goblin/tile127.png" id="1_omg6o"]
+[ext_resource type="Script" uid="uid://j6lnd3bytq44" path="res://content/enemy/enemy_unit/enemy_unit_data/_enemy_unit_data.gd" id="1_uultq"]
+
+[resource]
+script = ExtResource("1_uultq")
+id = "goblin"
+max_health = 3
+attack = 4
+xp = 2
+texture = ExtResource("1_omg6o")
+metadata/_custom_type_script = "uid://j6lnd3bytq44"

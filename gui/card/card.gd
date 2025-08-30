@@ -12,15 +12,16 @@ const MY_SCENE = preload("res://gui/card/card.tscn")
 @onready var card_state_machine: CardStateMachine = %CardStateMachine
 
 var init_parent: Node
-
 var drop_area: Area2D
 var tween: Tween
+
+var targets: Array[Node] = []
 var playable := true
 var disabled := false
 
-static func create_instance(parent: Node, card_data: CardData) -> Card:
+static func create_instance(parent: Node, _card_data: CardData) -> Card:
 	var instance := MY_SCENE.instantiate() as Card
-	instance.card_data = card_data.duplicate()
+	instance.card_data = _card_data.duplicate()
 	instance.init_parent = parent
 	parent.add_child(instance)
 	return instance
@@ -31,13 +32,12 @@ func _ready() -> void:
 	
 	card_drop.area_entered.connect(_on_card_drop_area_entered)
 	card_drop.area_exited.connect(_on_card_drop_area_exited)
-		
 
 func play() -> void:
 	if not card_data:
 		return
 	
-	var success := card_data.play(Const.PlayPhase.ATTACK, [self])
+	var success := card_data.play(Const.PlayPhase.ATTACK, targets)
 	if success:
 		queue_free()
 
@@ -60,5 +60,5 @@ func animate_to_position(new_position: Vector2, duration: float) -> void:
 func _on_card_drop_area_entered(area: Area2D) -> void:
 	drop_area = area
 
-func _on_card_drop_area_exited(area: Area2D) -> void:
+func _on_card_drop_area_exited(_area: Area2D) -> void:
 	drop_area = null
