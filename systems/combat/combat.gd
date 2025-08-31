@@ -33,6 +33,7 @@ func _on_end_phase_pressed() -> void:
 	if _try_combat_end():
 		return
 	if Global.game.current_phase == Const.PlayPhase.BLOCK:
+		enemy_manager.block_end()
 		Global.game.set_phase(Const.PlayPhase.ATTACK)
 	elif Global.game.current_phase == Const.PlayPhase.ATTACK:
 		Global.game.end_turn()

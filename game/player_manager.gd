@@ -1,6 +1,7 @@
 class_name PlayerManager
 extends Node
 
+const WOUND = preload("res://content/card_data/_wound/wound.tres")
 const SHIELD = preload("res://content/card_data/shield/shield.tres")
 const SLASH = preload("res://content/card_data/slash/slash.tres")
 
@@ -33,6 +34,12 @@ func play_card(card_data: CardData) -> void:
 		hand.erase(card_data)
 		discard_pile.append(card_data)
 	
+	_update_deck_ui()
+
+func take_damage(damage: int) -> void:
+	var wounds_received = ceil(damage as float / armor)
+	for _i in range(0, wounds_received):
+		hand.append(WOUND.duplicate())
 	_update_deck_ui()
 
 func shuffle_to_draw_pile() -> void:

@@ -3,7 +3,6 @@ extends Resource
 
 @export_group("Card Attributes")
 @export var id: String
-@export var type: Const.CardType
 @export var rarity: Const.Rarity
 @export var target: Const.Target
 
@@ -47,6 +46,18 @@ func has_block() -> bool:
 	return 'play_block' in self
 func has_attack() -> bool:
 	return 'play_attack' in self
+
+func is_phase_compatible(phase: Const.PlayPhase) -> bool:
+	match phase:
+		Const.PlayPhase.MOVEMENT:
+			return has_movement()
+		Const.PlayPhase.INFLUENCE:
+			return has_influence()
+		Const.PlayPhase.BLOCK:
+			return has_block()
+		Const.PlayPhase.ATTACK:
+			return has_attack()
+	return false
 
 func play(phase: Const.PlayPhase, targets: Array[Node]) -> bool:
 	if targets.is_empty():

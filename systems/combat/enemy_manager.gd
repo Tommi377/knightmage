@@ -9,6 +9,10 @@ func turn_start() -> void:
 	for enemy in enemy_units:
 		enemy.turn_start()
 
+func block_end() -> void:
+	for enemy in enemy_units:
+		Global.game.player.take_damage(enemy.damage)
+
 func spawn_enemies(enemies: Array[EnemyUnitData]) -> void:
 	for enemy in enemies:
 		spawn_enemy(enemy.duplicate())
