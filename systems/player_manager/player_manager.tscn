@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmhbaw5ohlw26"]
+
+[ext_resource type="Script" uid="uid://r842ihd01eh6" path="res://game/player_manager.gd" id="1_jvosj"]
+[ext_resource type="Script" uid="uid://buuuc22plokly" path="res://hand.gd" id="2_prnka"]
+[ext_resource type="PackedScene" uid="uid://cl3x10xi2ih3e" path="res://gui/DeckUI/deck_display.tscn" id="3_prnka"]
+
+[node name="PlayerManager" type="Node"]
+script = ExtResource("1_jvosj")
+
+[node name="DeckUI" type="CanvasLayer" parent="." groups=["game_ui_layer"]]
+
+[node name="HandDisplay" type="HBoxContainer" parent="DeckUI"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -40.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 1
+script = ExtResource("2_prnka")
+
+[node name="DrawPile" parent="DeckUI" instance=ExtResource("3_prnka")]
+unique_name_in_owner = true
+offset_top = -25.0
+offset_bottom = -4.0
+
+[node name="DiscardPile" parent="DeckUI" instance=ExtResource("3_prnka")]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -21.0
+offset_top = -25.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0

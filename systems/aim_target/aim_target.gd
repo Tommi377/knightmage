@@ -6,6 +6,7 @@ const ARC_POINTS := 8
 @onready var card_arc: Line2D = $CanvasLayer/Line2D
 
 var current_card: Card
+var current_target: Node = null
 var targeting := false
 
 func _ready() -> void:
@@ -21,6 +22,10 @@ func _process(_delta: float) -> void:
 	area_2d.position = get_local_mouse_position()
 	card_arc.points = _get_points()
 
+func get_target() -> Array[Node]:
+	if current_target:
+		return [current_target]
+	return []
 
 func _get_points() -> Array:
 	var points := []
@@ -52,6 +57,7 @@ func _on_card_aim_start(card: Card) -> void:
 	area_2d.monitoring = true
 	area_2d.monitorable = true
 	current_card = card
+	current_target = null
 
 
 func _on_card_aim_end(_card: Card) -> void:
@@ -66,13 +72,10 @@ func _on_card_aim_end(_card: Card) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	
-	if not current_card.targets.has(area):
-		current_card.targets.append(area)
+	current_target = area
 
 
-func _on_area_2d_area_exited(area: Area2D) -> void:
+func _on_area_2d_area_exited(_area: Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	
-	current_card.targets.erase(area)
+	current_target = null

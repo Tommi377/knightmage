@@ -21,11 +21,11 @@ extends Resource
 func is_single_targeted() -> bool:
 	return target == Const.Target.SINGLE_ENEMY
 
-func _get_targets(targets: Array[Node]) -> Array[Node]:
-	if not targets:
+func get_targets(node_in_tree: Node) -> Array[Node]:
+	if not node_in_tree:
 		return []
 		
-	var tree := targets[0].get_tree()
+	var tree := node_in_tree.get_tree()
 	
 	match target:
 		Const.Target.SELF:
@@ -34,6 +34,8 @@ func _get_targets(targets: Array[Node]) -> Array[Node]:
 			return tree.get_nodes_in_group("enemies")
 		Const.Target.EVERYONE:
 			return tree.get_nodes_in_group("player") + tree.get_nodes_in_group("enemies")
+		Const.Target.SINGLE_ENEMY:
+			return tree.get_first_node_in_group("aim_target").get_target()
 		_:
 			return []
 
@@ -47,6 +49,9 @@ func has_attack() -> bool:
 	return 'play_attack' in self
 
 func play(phase: Const.PlayPhase, targets: Array[Node]) -> bool:
+	if targets.is_empty():
+		return false
+	
 	var card_played := false
 	match phase:
 		Const.PlayPhase.MOVEMENT when has_movement():
@@ -58,13 +63,19 @@ func play(phase: Const.PlayPhase, targets: Array[Node]) -> bool:
 		Const.PlayPhase.ATTACK when has_attack():
 			card_played = call("play_attack", targets)
 		_:
-			card_played = play_default(targets)
+			# Kinda scuffed to have a different function signature than the rest
+			# TODO: Investigate wheter this will be a problem in the future
+			card_played = play_default(phase, targets)
 	if card_played:
 		Events.card.play.emit(self)
 	return card_played
 
-func play_default(_targets: Array[Node]) -> bool:
-	print_debug("Played using default")
+func play_default(phase: Const.PlayPhase, targets: Array[Node]) -> bool:
+	match phase:
+		Const.PlayPhase.BLOCK:
+			ActionManager.add_action(BlockEffect.new(1, targets[0]))
+		Const.PlayPhase.ATTACK:
+			ActionManager.add_action(AttackEffect.new(1, targets[0]))
 	return true
 
 func get_description() -> String:

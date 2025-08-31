@@ -1,6 +1,7 @@
 class_name Card
 extends Control
 
+signal card_play_request(card_data: CardData)
 signal card_reparent(card: Card)
 
 const MY_SCENE = preload("res://gui/card/card.tscn")
@@ -15,18 +16,19 @@ var init_parent: Node
 var drop_area: Area2D
 var tween: Tween
 
-var targets: Array[Node] = []
 var playable := true
 var disabled := false
 
 static func create_instance(parent: Node, _card_data: CardData) -> Card:
 	var instance := MY_SCENE.instantiate() as Card
-	instance.card_data = _card_data.duplicate()
-	instance.init_parent = parent
+	instance.card_data = _card_data
 	parent.add_child(instance)
 	return instance
 
 func _ready() -> void:
+	if not init_parent:
+		init_parent = get_parent()
+	
 	update_ui()
 	init_state_machine()
 	
@@ -34,12 +36,8 @@ func _ready() -> void:
 	card_drop.area_exited.connect(_on_card_drop_area_exited)
 
 func play() -> void:
-	if not card_data:
-		return
-	
-	var success := card_data.play(Const.PlayPhase.ATTACK, targets)
-	if success:
-		queue_free()
+	card_play_request.emit(card_data)
+	queue_free()
 
 func is_over_drop_area() -> bool:
 	return drop_area != null

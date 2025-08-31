@@ -1,11 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ro6va2mfvwe2"]
+[gd_scene load_steps=9 format=3 uid="uid://ro6va2mfvwe2"]
 
 [ext_resource type="Script" uid="uid://vtyuy2dh85gi" path="res://systems/combat/combat.gd" id="1_fquu5"]
 [ext_resource type="Texture2D" uid="uid://bax2y8i6fpxe6" path="res://systems/combat/battle_fields.png" id="1_v40hl"]
 [ext_resource type="PackedScene" uid="uid://y7ns8y4emnix" path="res://systems/aim_target/aim_target.tscn" id="2_v40hl"]
+[ext_resource type="Script" uid="uid://02s3nnqcf2pp" path="res://systems/combat/enemy_manager.gd" id="4_0ek7d"]
+[ext_resource type="Script" uid="uid://dxcbqm4guw1yh" path="res://gui/random/phase_label.gd" id="7_hss22"]
+[ext_resource type="Script" uid="uid://koln4t3bepmr" path="res://gui/random/end_phase_button.gd" id="7_i7848"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kujvl"]
 size = Vector2(256, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hss22"]
+font_size = 6
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [node name="Combat" type="Node2D"]
 script = ExtResource("1_fquu5")
@@ -25,37 +34,53 @@ shape = SubResource("RectangleShape2D_kujvl")
 
 [node name="AimTarget" parent="." instance=ExtResource("2_v40hl")]
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="EnemyManager" type="Node2D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("4_0ek7d")
 
-[node name="Spawn1" type="Marker2D" parent="Enemies"]
+[node name="Spawn1" type="Marker2D" parent="EnemyManager"]
 position = Vector2(128, 76)
 
-[node name="Spawn2" type="Marker2D" parent="Enemies"]
+[node name="Spawn2" type="Marker2D" parent="EnemyManager"]
 position = Vector2(160, 76)
 
-[node name="Spawn3" type="Marker2D" parent="Enemies"]
+[node name="Spawn3" type="Marker2D" parent="EnemyManager"]
 position = Vector2(96, 76)
 
-[node name="Spawn4" type="Marker2D" parent="Enemies"]
+[node name="Spawn4" type="Marker2D" parent="EnemyManager"]
 position = Vector2(192, 76)
 
-[node name="Spawn5" type="Marker2D" parent="Enemies"]
+[node name="Spawn5" type="Marker2D" parent="EnemyManager"]
 position = Vector2(63, 76)
 
 [node name="CombatUI" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CombatUI"]
+[node name="EndPhaseButton" type="Button" parent="CombatUI"]
+unique_name_in_owner = true
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -47.0
+offset_left = -48.0
 offset_top = -42.0
-offset_right = -1.0
+offset_right = -2.0
 offset_bottom = -30.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Block
 "
+script = ExtResource("7_i7848")
+
+[node name="PhaseLabel" type="Label" parent="CombatUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 4.0
+offset_right = 41.0
+offset_bottom = 10.0
+grow_horizontal = 2
+text = "Current Phase: Attack"
+label_settings = SubResource("LabelSettings_hss22")
+script = ExtResource("7_hss22")

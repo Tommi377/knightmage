@@ -10,7 +10,7 @@ _limits = [0.195338, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 0.195338), 0.0, 0.0, 0, 0, Vector2(0.896552, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.195338), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="AimTarget" type="Node2D"]
+[node name="AimTarget" type="Node2D" groups=["aim_target"]]
 script = ExtResource("1_ga0sy")
 
 [node name="Area2D" type="Area2D" parent="."]

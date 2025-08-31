@@ -1,14 +1,38 @@
 class_name Combat
 extends Node2D
 
-@onready var enemies: Node2D = %Enemies
+signal combat_end
 
-var enemy_count := 0
+@export var enemy_datas: Array[EnemyUnitData]
+
+@onready var enemy_manager: EnemyManager = %EnemyManager
+@onready var end_phase_button: Button = %EndPhaseButton
+
+const GOBLIN = preload("res://content/enemy/enemy_unit/enemy_unit_data/goblin/goblin.tres")
 
 func _ready() -> void:
-	spawn_enemy(load("res://content/enemy/enemy_unit/enemy_unit_data/goblin/goblin.tres"))
-	spawn_enemy(load("res://content/enemy/enemy_unit/enemy_unit_data/goblin/goblin.tres"))
+	enemy_manager.spawn_enemies(enemy_datas)
+	
+	end_phase_button.pressed.connect(_on_end_phase_pressed)
 
-func spawn_enemy(enemy_unit_data: EnemyUnitData) -> void:
-	EnemyUnit.create_instance(enemies.get_child(enemy_count), enemy_unit_data)
-	enemy_count += 1
+func turn_start() -> void:
+	enemy_manager.turn_start()
+
+func turn_end() -> void:
+	pass
+
+func _try_combat_end() -> bool:
+	if enemy_manager.get_enemy_count() == 0:
+		# Combat end logic
+		Log.info("Combat end!!!")
+		combat_end.emit()
+		return true
+	return false
+
+func _on_end_phase_pressed() -> void:
+	if _try_combat_end():
+		return
+	if Global.game.current_phase == Const.PlayPhase.BLOCK:
+		Global.game.set_phase(Const.PlayPhase.ATTACK)
+	elif Global.game.current_phase == Const.PlayPhase.ATTACK:
+		Global.game.end_turn()

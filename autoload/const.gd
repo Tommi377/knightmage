@@ -7,6 +7,10 @@ enum Target { SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE }
 
 enum PlayPhase { MOVEMENT, INFLUENCE, BLOCK, ATTACK }
 
+const GlobalGroups := {
+	"GAME_UI": "game_ui_layer"
+}
+
 const RARITY_COLORS := {
 	Rarity.COMMON: Color.GRAY,
 	Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,

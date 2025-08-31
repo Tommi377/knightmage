@@ -8,7 +8,7 @@ func get_state_id() -> State:
 	return State.DRAGGING
 
 func enter() -> void:
-	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
+	var ui_layer := get_tree().get_first_node_in_group(Const.GlobalGroups.GAME_UI)
 	if ui_layer:
 		card.reparent(ui_layer)
 	

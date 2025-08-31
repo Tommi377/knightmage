@@ -3,7 +3,7 @@ extends Node
 
 var action_queue: Array[CardEffect] = []
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	await process_action()
 
 func add_action(effect: CardEffect) -> void:
@@ -14,4 +14,5 @@ func process_action() -> void:
 		return
 	
 	var effect := action_queue.pop_front() as CardEffect
+	@warning_ignore("redundant_await")
 	await effect.apply()
