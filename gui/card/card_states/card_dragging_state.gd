@@ -25,7 +25,7 @@ func on_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		card.global_position = card.get_global_mouse_position() - card.pivot_offset
 		
-		if card.card_data.is_single_targeted() and card.is_over_drop_area():
+		if card.card_data.is_single_targeted(Global.game.current_phase) and card.is_over_drop_area():
 			transition_requested.emit(self, CardState.State.AIMING)
 			return
 

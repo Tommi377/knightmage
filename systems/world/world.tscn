@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=4 uid="uid://dbqmg7cbvi5l1"]
+
+[ext_resource type="TileSet" uid="uid://ci6l1codl3rd4" path="res://systems/world/tileset.tres" id="1_5r7op"]
+[ext_resource type="Script" uid="uid://dlo1115xalaoc" path="res://systems/world/world.gd" id="1_u8bt2"]
+[ext_resource type="PackedScene" uid="uid://bjb8r1lv6jdf2" path="res://systems/world/player_mini/player_mini.tscn" id="2_mnuaw"]
+[ext_resource type="Script" uid="uid://gxt54mgvxyr0" path="res://systems/world/hex_map.gd" id="3_1cpwr"]
+[ext_resource type="Script" uid="uid://odp67f3hele2" path="res://systems/world/highlight.gd" id="3_t4vd5"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_u8bt2")
+
+[node name="HexMap" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAIAAAD//wEAAQAAAAAAAAD//wAAAQACAAAAAAAAAP//AQACAAAAAAABAAAAAQACAAAAAAAAAAEAAQAAAAAAAAABAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAMAAAABAP3/AQAAAAMAAAD///7/AQAAAAMAAAAAAP3/AQAAAAMAAAD/////AQAAAAMAAAACAP7/AQAFAAEAAAACAP3/AQADAAAAAAADAPz/AQADAAAAAAACAPz/AQADAAAAAAADAP3/AQAAAAAAAAACAP//AQAAAAAAAAADAP7/AQAFAAEAAAAAAPz/AQAAAAAAAAABAPz/AQAFAAAAAAD///3/AQACAAAAAAD+/wIAAQADAAAAAAD//wIAAQAAAAAAAAD+/wMAAQACAAAAAAD//wMAAQACAAAAAAAAAAIAAQACAAAAAAABAAEAAQAGAAAAAAABAAIAAQAGAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAAAAQACAAAAAAADAP//AQAAAAAAAAACAAEAAQAAAAMAAAADAAAAAQAAAAMAAAADAAEAAQAAAAMAAAAEAP//AQAAAAMAAAAEAAAAAQAAAAMAAAAEAP7/AQAAAAAAAAAAAAQAAQACAAAAAAD//wQAAQAFAAAAAAD+/wQAAQACAAAAAAD+/wAAAQAAAAAAAAD8/wIAAQAAAAAAAAD9/wIAAQADAAAAAAAEAP3/AQACAAAAAAAEAPz/AQACAAAAAAAFAPz/AQAGAAAAAAAFAP3/AQAGAAAAAAAFAP7/AQAGAAAAAAAFAP//AQAGAAAAAAD+////AQAFAAAAAAD+//7/AQACAAAAAAD9////AQAAAAAAAAD9/wAAAQADAAAAAAD8/wEAAQAFAAAAAAD9/wEAAQADAAAAAAD7/wIAAQAAAAAAAAD7/wMAAQAAAAAAAAD7/wEAAQAAAAAAAAD8/wAAAQAAAAAAAAD7/wQAAQAFAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQACAAAAAAD8/wMAAQAAAAAAAAD9/wMAAQACAAAAAAD+/wEAAQAFAAEAAAA=")
+tile_set = ExtResource("1_5r7op")
+script = ExtResource("3_1cpwr")
+
+[node name="Buildings" type="TileMapLayer" parent="HexMap"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAAAP3/AQAHAAMAAAABAP//AQAAAAEAAAAEAP7/AQABAAEAAAD8/wIAAQABAAEAAAAAAAMAAQACAAEAAAADAAAAAQAGAAMAAAA=")
+tile_set = ExtResource("1_5r7op")
+
+[node name="Highlight" type="TileMapLayer" parent="HexMap"]
+y_sort_enabled = true
+tile_set = ExtResource("1_5r7op")
+script = ExtResource("3_t4vd5")
+tile = Vector2i(1, 5)
+atlas_id = 1
+
+[node name="PlayerMini" parent="." instance=ExtResource("2_mnuaw")]
+position = Vector2(16, 12)

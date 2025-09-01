@@ -4,13 +4,19 @@ extends Node
 const WOUND = preload("res://content/card_data/_wound/wound.tres")
 const SHIELD = preload("res://content/card_data/shield/shield.tres")
 const SLASH = preload("res://content/card_data/slash/slash.tres")
+const RUN = preload("res://content/card_data/run/run.tres")
 
 var hand_limit := 5
 var armor := 3
 
+var current_move := 0
+var current_coord := Vector2i(0, 0)
+
 var draw_pile: Array[CardData] = []
 var discard_pile: Array[CardData] = []
 var hand: Array[CardData] = []
+
+@onready var player_mini: Node = get_tree().get_first_node_in_group("player_mini")
 
 @onready var hand_display: Hand = %HandDisplay
 @onready var draw_display: DeckDisplay = %DrawPile
@@ -19,16 +25,20 @@ var hand: Array[CardData] = []
 func _ready() -> void:
 	hand_display._play_handler = Callable(self, "play_card")
 	
-	_load_deck([SHIELD, SHIELD, SHIELD, SHIELD, SLASH, SLASH, SLASH, SLASH])
+	_load_deck([RUN, RUN, RUN, RUN, SHIELD, SHIELD, SHIELD, SHIELD, SLASH, SLASH, SLASH, SLASH])
 	shuffle_to_draw_pile()
 	draw_to_hand_limit()
 	_update_deck_ui()
+
+func turn_end() -> void:
+	current_move = 0
+	draw_to_hand_limit()
 
 func play_card(card_data: CardData) -> void:
 	if not card_data:
 		return
 	
-	var targets := card_data.get_targets(self)
+	var targets := card_data.get_targets(Global.game.current_phase, self)
 	var success := card_data.play(Global.game.current_phase, targets)
 	if success:
 		hand.erase(card_data)
@@ -37,7 +47,7 @@ func play_card(card_data: CardData) -> void:
 	_update_deck_ui()
 
 func take_damage(damage: int) -> void:
-	var wounds_received = ceil(damage as float / armor)
+	var wounds_received: float = ceil(damage as float / armor)
 	for _i in range(0, wounds_received):
 		hand.append(WOUND.duplicate())
 	_update_deck_ui()

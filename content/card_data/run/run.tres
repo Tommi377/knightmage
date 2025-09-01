@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://brl2cdqv1xb21"]
+
+[ext_resource type="Texture2D" uid="uid://tslmcaude33b" path="res://content/card_data/run/tile039.png" id="1_5hl4b"]
+[ext_resource type="Script" uid="uid://dostjpmfucfj5" path="res://content/card_data/run/run.gd" id="1_pcekp"]
+
+[resource]
+script = ExtResource("1_pcekp")
+base_move = 2
+id = "run"
+rarity = 0
+target_modes = Dictionary[int, int]({})
+icon = ExtResource("1_5hl4b")
+description = ""
+metadata/_custom_type_script = "uid://cj0285n0jstmd"

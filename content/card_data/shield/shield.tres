@@ -7,9 +7,10 @@
 script = ExtResource("1_t3a44")
 base_block = 2
 id = "shield"
-type = 0
 rarity = 0
-target = 1
+target_modes = Dictionary[int, int]({
+2: 1
+})
 icon = ExtResource("1_vyr1c")
 description = ""
 metadata/_custom_type_script = "uid://cj0285n0jstmd"

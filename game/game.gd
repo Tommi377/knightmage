@@ -4,33 +4,41 @@ extends Node
 signal phase_start(phase: Const.PlayPhase)
 signal phase_end(phase: Const.PlayPhase)
 
+
 const COMBAT = preload("res://systems/combat/combat.tscn")
 
 # TEMP
 const GOBLIN = preload("res://content/enemy/enemy_unit/enemy_unit_data/goblin/goblin.tres")
 
 @onready var player: PlayerManager = $PlayerManager
-@onready var message_center: MessageCenter = $MessageCenter
+@onready var world: World = $World
+
+@onready var message_center: MessageCenter = %MessageCenter
+@onready var scene_holder: Node = %SceneHolder
 
 var current_combat: Combat
 
 # Turn info
 var current_turn := 0
-var current_phase := Const.PlayPhase.BLOCK
+var current_phase := Const.PlayPhase.MOVEMENT
 
 func _init() -> void:
 	Global.game  = self
 
 func _ready() -> void :
 	set_physics_process(false)
-	instantiate_combat()
+	# instantiate_combat()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_mouse"):
+		try_move_player()
 
 func instantiate_combat() -> void:
 	current_combat = COMBAT.instantiate() as Combat
-	current_combat.enemy_datas = [GOBLIN, GOBLIN]
+	current_combat.enemy_datas = [GOBLIN]
 	current_combat.combat_end.connect(_on_combat_end)
-	add_child(current_combat)
-	move_child(current_combat, 0)
+	set_phase(Const.PlayPhase.BLOCK)
+	scene_holder.add_child(current_combat)
 
 func set_phase(phase: Const.PlayPhase) -> void:
 	phase_end.emit(current_phase)
@@ -42,7 +50,7 @@ func start_turn() -> void:
 		current_combat.turn_start()
 	
 func end_turn() -> void:
-	player.draw_to_hand_limit()
+	player.turn_end()
 	
 	if current_combat:
 		current_combat.turn_end()
@@ -52,8 +60,27 @@ func end_turn() -> void:
 	
 	start_turn()
 
+func try_move_player() -> void:
+	# TODO: Make this based on terrain type
+	if player.current_move >= 2:
+		player.current_move -= 2
+		var tile := world.hex_map.get_hovered_tile()
+		var goal := world.hex_map.map_to_global(world.hex_map.get_hovered_tile())
+		world.player_mini.move_to(goal)
+		player.current_coord = tile
+		
+		if check_encounter():
+			instantiate_combat()
+	else:
+		message_center.send("Not enough movement!")
+
+func check_encounter() -> bool:
+	print(player.current_coord)
+	if player.current_coord == Vector2i(0, -1):
+		return true
+	return false
 
 func _on_combat_end() -> void:
 	current_combat = null
-	message_center.display_message("Combat Over!")
+	message_center.send("Combat Over!")
 	end_turn()

@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 	if not targeting:
 		return
 
-	area_2d.position = get_local_mouse_position()
+	area_2d.global_position = get_global_mouse_position()
 	card_arc.points = _get_points()
 
 func get_target() -> Array[Node]:
@@ -31,7 +31,7 @@ func _get_points() -> Array:
 	var points := []
 	var start := current_card.global_position
 	start.x += (current_card.size.x / 2)
-	var target := get_local_mouse_position()
+	var target := current_card.get_global_mouse_position()
 	var distance := (target - start)
 	
 	for i in ARC_POINTS:
@@ -50,7 +50,7 @@ func ease_out_cubic(number : float) -> float:
 
 
 func _on_card_aim_start(card: Card) -> void:
-	if not card.card_data.is_single_targeted():
+	if not card.card_data.is_single_targeted(Global.game.current_phase):
 		return
 	
 	targeting = true

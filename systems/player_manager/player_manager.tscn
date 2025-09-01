@@ -1,11 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmhbaw5ohlw26"]
+[gd_scene load_steps=6 format=3 uid="uid://cmhbaw5ohlw26"]
 
 [ext_resource type="Script" uid="uid://r842ihd01eh6" path="res://game/player_manager.gd" id="1_jvosj"]
 [ext_resource type="Script" uid="uid://buuuc22plokly" path="res://hand.gd" id="2_prnka"]
+[ext_resource type="PackedScene" uid="uid://y7ns8y4emnix" path="res://systems/aim_target/aim_target.tscn" id="2_rayrk"]
 [ext_resource type="PackedScene" uid="uid://cl3x10xi2ih3e" path="res://gui/DeckUI/deck_display.tscn" id="3_prnka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prnka"]
+size = Vector2(256, 100)
 
 [node name="PlayerManager" type="Node"]
 script = ExtResource("1_jvosj")
+
+[node name="AimTarget" parent="." instance=ExtResource("2_rayrk")]
+
+[node name="CardDropArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(128, 50)
+shape = SubResource("RectangleShape2D_prnka")
 
 [node name="DeckUI" type="CanvasLayer" parent="." groups=["game_ui_layer"]]
 

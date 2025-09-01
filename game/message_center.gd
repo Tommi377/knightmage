@@ -3,7 +3,7 @@ extends Control
 
 @onready var message_label: Label = $Message
 
-func display_message(msg: String, duration := 2) -> void:
+func send(msg: String, duration := 2) -> void:
 	message_label.text = msg
 	message_label.show()
 

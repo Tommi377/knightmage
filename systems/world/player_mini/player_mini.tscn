@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjb8r1lv6jdf2"]
+
+[ext_resource type="Texture2D" uid="uid://dmvpldo2im88h" path="res://systems/world/player_mini/tile_0098.png" id="1_gunpl"]
+[ext_resource type="Script" uid="uid://chylyurqdpwkx" path="res://systems/world/player_mini/player_mini.gd" id="1_vm111"]
+[ext_resource type="Shader" uid="uid://bbuoq2bfrlj8f" path="res://shader/outline.gdshader" id="1_wvvph"]
+
+[sub_resource type="Curve" id="Curve_vm111"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252874, -0.260611), -3.64057, -3.64057, 0, 0, Vector2(0.796935, 1), 2.31424, 2.31424, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvvph"]
+shader = ExtResource("1_wvvph")
+shader_parameter/line_colour = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvvph"]
+
+[node name="PlayerMini" type="Area2D" groups=["player_mini"]]
+script = ExtResource("1_vm111")
+walk_tween_curve = SubResource("Curve_vm111")
+
+[node name="Visual" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_wvvph")
+
+[node name="Sprite" type="Sprite2D" parent="Visual"]
+texture = ExtResource("1_gunpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wvvph")

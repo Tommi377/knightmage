@@ -7,9 +7,10 @@
 script = ExtResource("1_42kpy")
 base_damage = 2
 id = "slash"
-type = 0
 rarity = 0
-target = 1
+target_modes = Dictionary[int, int]({
+3: 1
+})
 icon = ExtResource("1_0onyx")
 description = ""
 metadata/_custom_type_script = "uid://cj0285n0jstmd"

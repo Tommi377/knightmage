@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 Const="*res://autoload/const.gd"
 Log="*res://autoload/log.gd"
-Data="*res://autoload/data.gd"
+Utils="*res://autoload/utils.gd"
 Events="*res://autoload/events.gd"
 Global="*res://autoload/global.gd"
 ActionManager="*res://autoload/action_manager.gd"
@@ -41,6 +41,7 @@ window/stretch/mode="viewport"
 
 game_ui_layer=""
 aim_target=""
+player_mini=""
 
 [gui]
 
