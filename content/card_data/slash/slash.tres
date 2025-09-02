@@ -8,7 +8,7 @@ script = ExtResource("1_42kpy")
 base_damage = 2
 id = "slash"
 rarity = 0
-target_modes = Dictionary[int, int]({
+supported_phases = Dictionary[int, int]({
 3: 1
 })
 icon = ExtResource("1_0onyx")

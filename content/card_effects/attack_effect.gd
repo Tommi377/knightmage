@@ -1,14 +1,14 @@
 class_name AttackEffect
 extends CardEffect
 
-var _damage: int
 var _target: EnemyUnit
+var _damage: int
 
-func _init(damage: int, target: EnemyUnit) -> void:
+func _init(target: EnemyUnit, damage: int) -> void:
 	assert(target is EnemyUnit, "Tried to instantiate AttackEffect on non-EnemyUnit")
 	
-	_damage = damage
 	_target = target
+	_damage = damage
 
 func apply() -> void:
 	# TODO: Modifiers

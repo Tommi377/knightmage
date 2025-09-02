@@ -5,10 +5,10 @@ extends CardData
 func get_description() -> String:
 	return description % base_block
 
-func play_block(targets: Array[Node]) -> bool:
+func _play_block(_player: PlayerManager, targets: Array[Node]) -> bool:
 	if targets.is_empty():
 		return false
 	
-	var block_effect := BlockEffect.new(base_block, targets[0])
+	var block_effect := BlockEffect.new(targets[0], base_block)
 	ActionManager.add_action(block_effect)
 	return true

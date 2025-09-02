@@ -1,14 +1,14 @@
 class_name BlockEffect
 extends CardEffect
 
-var _block: int
 var _target: EnemyUnit
+var _block: int
 
-func _init(block: int, target: EnemyUnit) -> void:
+func _init(target: EnemyUnit, block: int) -> void:
 	assert(target is EnemyUnit, "Tried to instantiate BlockEffect on non-EnemyUnit")
 	
-	_block = block
 	_target = target
+	_block = block
 
 func apply() -> void:
 	# TODO: Modifiers

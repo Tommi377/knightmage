@@ -39,7 +39,7 @@ func play_card(card_data: CardData) -> void:
 		return
 	
 	var targets := card_data.get_targets(Global.game.current_phase, self)
-	var success := card_data.play(Global.game.current_phase, targets)
+	var success := card_data.play(Global.game.current_phase, self, targets)
 	if success:
 		hand.erase(card_data)
 		discard_pile.append(card_data)

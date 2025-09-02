@@ -1,14 +1,16 @@
 class_name MoveEffect
 extends CardEffect
 
+var _target: PlayerManager
 var _move: int
 
-func _init(move: int) -> void:	
+func _init(target: PlayerManager, move: int) -> void:
+	_target = target
 	_move = move
 
 func apply() -> void:
 	# TODO: Modifiers
-	Global.game.player.current_move += _move
+	_target.current_move += _move
 
 func get_description() -> String:
 	return "Move %d" % [_move]

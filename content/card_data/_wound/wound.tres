@@ -1,13 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://caol2y5ufvnw6"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://caol2y5ufvnw6"]
 
 [ext_resource type="Script" uid="uid://cn2sxsnr33kyd" path="res://content/card_data/_wound/wound.gd" id="1_o1iw6"]
-[ext_resource type="Texture2D" uid="uid://dkbluvf4osdmi" path="res://content/card_data/_wound/tile1065.png" id="1_tx20w"]
 
 [resource]
 script = ExtResource("1_o1iw6")
-id = "wound"
+id = ""
 rarity = 0
-target_modes = Dictionary[int, int]({})
-icon = ExtResource("1_tx20w")
+supported_phases = Dictionary[int, int]({})
 description = ""
 metadata/_custom_type_script = "uid://cj0285n0jstmd"
