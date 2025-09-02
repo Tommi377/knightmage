@@ -60,6 +60,18 @@ func end_turn() -> void:
 	
 	start_turn()
 
+func end_phase() -> void:
+	if current_combat:
+		if current_combat._try_combat_end():
+			Global.game.end_turn()
+		if current_phase == Const.PlayPhase.BLOCK:
+			current_combat.enemy_manager.block_end()
+			Global.game.set_phase(Const.PlayPhase.ATTACK)
+		elif Global.game.current_phase == Const.PlayPhase.ATTACK:
+			Global.game.end_turn()
+	else:
+		Global.game.end_turn()
+
 func try_move_player() -> void:
 	# TODO: Make this based on terrain type
 	if player.current_move >= 2:
@@ -80,7 +92,13 @@ func check_encounter() -> bool:
 		return true
 	return false
 
+
 func _on_combat_end() -> void:
+	current_combat.queue_free()
 	current_combat = null
 	message_center.send("Combat Over!")
 	end_turn()
+
+
+func _on_end_phase_button_pressed() -> void:
+	end_phase()

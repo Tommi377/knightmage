@@ -7,7 +7,7 @@
 script = ExtResource("1_o1iw6")
 id = "wound"
 rarity = 0
-target = 0
+target_modes = Dictionary[int, int]({})
 icon = ExtResource("1_tx20w")
 description = ""
 metadata/_custom_type_script = "uid://cj0285n0jstmd"
