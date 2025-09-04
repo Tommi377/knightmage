@@ -15,7 +15,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAIAAAD//wEAAQAAAAAAAAD//wAAAQACAAA
 tile_set = ExtResource("1_5r7op")
 script = ExtResource("3_1cpwr")
 
-[node name="Buildings" type="TileMapLayer" parent="HexMap"]
+[node name="Structures" type="TileMapLayer" parent="HexMap"]
+unique_name_in_owner = true
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAP3/AQAHAAMAAAABAP//AQAAAAEAAAAEAP7/AQABAAEAAAD8/wIAAQABAAEAAAAAAAMAAQACAAEAAAADAAAAAQAGAAMAAAA=")
 tile_set = ExtResource("1_5r7op")

@@ -7,6 +7,14 @@ enum TargetMode { NONE, SINGLE_ENEMY }
 
 enum PlayPhase { MOVEMENT, INFLUENCE, BLOCK, ATTACK }
 
+enum StructureCategory {
+	BATTLE,
+	DUNGEON,
+	TRADE,
+	BONUS,
+	BOSS,
+}
+
 const GlobalGroups := {
 	"GAME_UI": "game_ui_layer"
 }

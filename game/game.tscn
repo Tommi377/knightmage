@@ -46,14 +46,14 @@ script = ExtResource("1_4fuuu")
 [node name="World" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_4fuuu")]
 player = NodePath("../PlayerManager")
 
+[node name="SceneHolder" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="MainCamera" type="Camera2D" parent="."]
 anchor_mode = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 script = ExtResource("6_dakft")
-
-[node name="SceneHolder" type="Node2D" parent="MainCamera"]
-unique_name_in_owner = true
 
 [node name="TextUI" type="CanvasLayer" parent="."]
 layer = 3

@@ -15,6 +15,7 @@ const GOBLIN = preload("res://content/enemy/enemy_unit/enemy_unit_data/goblin/go
 
 @onready var message_center: MessageCenter = %MessageCenter
 @onready var scene_holder: Node = %SceneHolder
+@onready var main_camera: MainCamera = $MainCamera
 
 var current_combat: Combat
 
@@ -38,7 +39,7 @@ func instantiate_combat() -> void:
 	current_combat.enemy_datas = [GOBLIN]
 	current_combat.combat_end.connect(_on_combat_end)
 	set_phase(Const.PlayPhase.BLOCK)
-	scene_holder.add_child(current_combat)
+	_set_scene_node(current_combat)
 
 func set_phase(phase: Const.PlayPhase) -> void:
 	phase_end.emit(current_phase)
@@ -92,9 +93,17 @@ func check_encounter() -> bool:
 		return true
 	return false
 
+func _set_scene_node(node: Node) -> void:
+	for child in scene_holder.get_children():
+		child.queue_free()
+	if node:
+		main_camera.enabled = false
+		scene_holder.add_child(node)
+	else:
+		main_camera.enabled = true
 
 func _on_combat_end() -> void:
-	current_combat.queue_free()
+	_set_scene_node(null)
 	current_combat = null
 	message_center.send("Combat Over!")
 	end_turn()
