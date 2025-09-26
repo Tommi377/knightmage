@@ -1,10 +1,84 @@
-[gd_scene load_steps=6 format=4 uid="uid://dbqmg7cbvi5l1"]
+[gd_scene load_steps=11 format=4 uid="uid://dbqmg7cbvi5l1"]
 
 [ext_resource type="TileSet" uid="uid://ci6l1codl3rd4" path="res://systems/world/tileset.tres" id="1_5r7op"]
 [ext_resource type="Script" uid="uid://dlo1115xalaoc" path="res://systems/world/world.gd" id="1_u8bt2"]
 [ext_resource type="PackedScene" uid="uid://bjb8r1lv6jdf2" path="res://systems/world/player_mini/player_mini.tscn" id="2_mnuaw"]
 [ext_resource type="Script" uid="uid://gxt54mgvxyr0" path="res://systems/world/hex_map.gd" id="3_1cpwr"]
 [ext_resource type="Script" uid="uid://odp67f3hele2" path="res://systems/world/highlight.gd" id="3_t4vd5"]
+[ext_resource type="Texture2D" uid="uid://36fclu354603" path="res://content/structure_data/structures.png" id="4_xh0rt"]
+[ext_resource type="Texture2D" uid="uid://40024kmh413p" path="res://systems/world/hex_sprites.png" id="5_64qhu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hwbxp"]
+texture = ExtResource("4_xh0rt")
+texture_region_size = Vector2i(32, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qyoi"]
+texture = ExtResource("5_64qhu")
+texture_region_size = Vector2i(32, 64)
+2:0/0 = 0
+3:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+1:0/0 = 0
+0:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dgsh5"]
+tile_shape = 3
+tile_layout = 3
+tile_offset_axis = 1
+tile_size = Vector2i(32, 28)
+sources/1 = SubResource("TileSetAtlasSource_0qyoi")
+sources/0 = SubResource("TileSetAtlasSource_hwbxp")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_u8bt2")
@@ -17,6 +91,11 @@ script = ExtResource("3_1cpwr")
 
 [node name="Structures" type="TileMapLayer" parent="HexMap"]
 unique_name_in_owner = true
+y_sort_enabled = true
+tile_set = SubResource("TileSet_dgsh5")
+
+[node name="StructuresOld" type="TileMapLayer" parent="HexMap"]
+visible = false
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAP3/AQAHAAMAAAABAP//AQAAAAEAAAAEAP7/AQABAAEAAAD8/wIAAQABAAEAAAAAAAMAAQACAAEAAAADAAAAAQAGAAMAAAA=")
 tile_set = ExtResource("1_5r7op")

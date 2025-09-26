@@ -7,6 +7,10 @@ enum TargetMode { NONE, SINGLE_ENEMY }
 
 enum PlayPhase { MOVEMENT, INFLUENCE, BLOCK, ATTACK }
 
+enum EffectApplyDuration { ONESHOT, CONSTANT }
+
+enum EffectTiming { INSTANT, TURN_START, TURN_END }
+
 enum StructureCategory {
 	BATTLE,
 	DUNGEON,

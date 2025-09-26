@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://yglid8gk46oh"]
+
+[ext_resource type="Texture2D" uid="uid://36fclu354603" path="res://content/structure_data/structures.png" id="1_2pxvs"]
+[ext_resource type="Script" uid="uid://bwuvp1n5wxfq2" path="res://content/structure_data/goblin_army/goblin_army.gd" id="1_ld67m"]
+[ext_resource type="Script" uid="uid://j6lnd3bytq44" path="res://content/enemy/enemy_unit/enemy_unit_data/_enemy_unit_data.gd" id="2_osnky"]
+[ext_resource type="Resource" uid="uid://how3g5g1vhqv" path="res://content/enemy/enemy_unit/enemy_unit_data/goblin/goblin.tres" id="3_2pxvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70k5u"]
+atlas = ExtResource("1_2pxvs")
+region = Rect2(0, 64, 32, 64)
+
+[resource]
+script = ExtResource("1_ld67m")
+units = Array[ExtResource("2_osnky")]([ExtResource("3_2pxvs")])
+id = "goblin_army"
+icon = SubResource("AtlasTexture_70k5u")
+metadata/_custom_type_script = "uid://5l32l21wr68o"

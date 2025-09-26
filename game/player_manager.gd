@@ -60,7 +60,6 @@ func shuffle_to_draw_pile() -> void:
 func draw_to_hand_limit() -> void:
 	for _i in range(hand.size(), hand_limit):
 		draw_card()
-	_update_deck_ui()
 
 func draw_card() -> void:
 	if draw_pile.is_empty():
@@ -68,6 +67,7 @@ func draw_card() -> void:
 	
 	var card_data := draw_pile.pop_front() as CardData
 	hand.append(card_data)
+	_update_deck_ui()
 
 func _update_deck_ui() -> void:
 	hand_display.update_ui(hand)

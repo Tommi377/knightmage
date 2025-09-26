@@ -28,15 +28,14 @@ func _init() -> void:
 
 func _ready() -> void :
 	set_physics_process(false)
-	# instantiate_combat()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
 		try_move_player()
 
-func instantiate_combat() -> void:
+func instantiate_combat(enemy_datas: Array[EnemyUnitData]) -> void:
 	current_combat = COMBAT.instantiate() as Combat
-	current_combat.enemy_datas = [GOBLIN]
+	current_combat.enemy_datas = enemy_datas
 	current_combat.combat_end.connect(_on_combat_end)
 	set_phase(Const.PlayPhase.BLOCK)
 	_set_scene_node(current_combat)
@@ -47,6 +46,8 @@ func set_phase(phase: Const.PlayPhase) -> void:
 	phase_start.emit(current_phase)
 
 func start_turn() -> void:
+	ActionManager.process_action(Const.EffectTiming.TURN_START)
+
 	if current_combat:
 		current_combat.turn_start()
 	
@@ -54,24 +55,34 @@ func end_turn() -> void:
 	player.turn_end()
 	
 	if current_combat:
-		current_combat.turn_end()
-		set_phase(Const.PlayPhase.BLOCK)
+		end_turn_combat()
 	else:
-		set_phase(Const.PlayPhase.MOVEMENT)
+		end_turn_world()
 	
+	ActionManager.process_action(Const.EffectTiming.TURN_END)
 	start_turn()
+
+func end_turn_combat() -> void:
+	current_combat.turn_end()
+	set_phase(Const.PlayPhase.BLOCK)
+
+func end_turn_world() -> void:
+	var structure:= world.get_structure(player.current_coord)
+	if structure and structure.has_method("apply_round_end"):
+		structure.apply_round_end(player)
+	set_phase(Const.PlayPhase.MOVEMENT)
 
 func end_phase() -> void:
 	if current_combat:
 		if current_combat._try_combat_end():
-			Global.game.end_turn()
+			end_turn()
 		if current_phase == Const.PlayPhase.BLOCK:
 			current_combat.enemy_manager.block_end()
-			Global.game.set_phase(Const.PlayPhase.ATTACK)
-		elif Global.game.current_phase == Const.PlayPhase.ATTACK:
-			Global.game.end_turn()
+			set_phase(Const.PlayPhase.ATTACK)
+		elif current_phase == Const.PlayPhase.ATTACK:
+			end_turn()
 	else:
-		Global.game.end_turn()
+		end_turn()
 
 func try_move_player() -> void:
 	# TODO: Make this based on terrain type
@@ -82,16 +93,11 @@ func try_move_player() -> void:
 		world.player_mini.move_to(goal)
 		player.current_coord = tile
 		
-		if check_encounter():
-			instantiate_combat()
+		var structure:= world.get_structure(player.current_coord)
+		if structure and structure.has_method("apply_enter"):
+			structure.apply_enter(player)
 	else:
 		message_center.send("Not enough movement!")
-
-func check_encounter() -> bool:
-	print(player.current_coord)
-	if player.current_coord == Vector2i(0, -1):
-		return true
-	return false
 
 func _set_scene_node(node: Node) -> void:
 	for child in scene_holder.get_children():

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://g0kgyrmupti7"]
+
+[ext_resource type="Texture2D" uid="uid://36fclu354603" path="res://content/structure_data/structures.png" id="1_60ch8"]
+[ext_resource type="Script" uid="uid://6hng2qe278hv" path="res://content/structure_data/cottage/cottage.gd" id="1_rl53h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rd77"]
+atlas = ExtResource("1_60ch8")
+region = Rect2(0, 0, 32, 64)
+
+[resource]
+script = ExtResource("1_rl53h")
+id = "cottage"
+category = 3
+icon = SubResource("AtlasTexture_8rd77")
+metadata/_custom_type_script = "uid://5l32l21wr68o"
